@@ -4,7 +4,7 @@ type RemoteTask = {
   "is_completed?": boolean;
 };
 
-class Task {
+export class Task {
   title: string;
   description: string | null;
   isCompleted: boolean;

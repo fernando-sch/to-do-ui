@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "@/config";
-import { buildTaskDTO } from "@/tasks/dto";
+import { buildTaskDTO, Task } from "@/tasks/dto";
 
 export const useFetchTasks = () => {
   const fetchTasks = async () => {
@@ -9,5 +9,5 @@ export const useFetchTasks = () => {
       .then((response) => response.data.data.map(buildTaskDTO));
   };
 
-  return useQuery({ queryKey: ["fetchTasks"], queryFn: fetchTasks });
+  return useQuery<Task[]>({ queryKey: ["fetchTasks"], queryFn: fetchTasks });
 };

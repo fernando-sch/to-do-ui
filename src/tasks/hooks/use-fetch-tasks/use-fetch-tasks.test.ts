@@ -1,9 +1,10 @@
+import { describe, it, expect } from "vitest";
+import { useFetchTasks } from "@/tasks/hooks/use-fetch-tasks";
+import { waitFor } from "@testing-library/react";
 import {
   startMockServer,
   renderHookWithQueryProvider,
 } from "@/__tests__/helpers";
-import { useFetchTasks } from "@/tasks/hooks/use-fetch-tasks";
-import { waitFor } from "@testing-library/react";
 
 describe("useFetchTasks", () => {
   let server: ReturnType<typeof startMockServer>;

@@ -1,23 +1,28 @@
+import {
+  Title,
+  TaskWrapper,
+  Descrition,
+} from "@/tasks/components/task-card/task-card.styles";
+
 type TaskCardProps = {
   title: string;
   description: string | null;
-  isCompleted: boolean;
+  isCompleted?: boolean;
 };
 
 export const TaskCard = ({
   title,
   description,
-  isCompleted,
+  isCompleted = false,
 }: TaskCardProps) => {
   return (
-    <li>
-      <h4>{title}</h4>
+    <TaskWrapper isCompleted={isCompleted}>
+      <Title>{title}</Title>
       {description ? (
-        <p>{description}</p>
+        <Descrition>{description}</Descrition>
       ) : (
-        <p>Task doesn't have a description.</p>
+        <Descrition>Task doesn't have a description.</Descrition>
       )}
-      {isCompleted && <p>Task is completed.</p>}
-    </li>
+    </TaskWrapper>
   );
 };

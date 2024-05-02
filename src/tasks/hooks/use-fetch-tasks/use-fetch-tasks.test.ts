@@ -14,7 +14,7 @@ describe("useFetchTasks", () => {
   });
 
   afterEach(() => {
-    server.shutdown;
+    server.shutdown();
   });
 
   it("should return tasks list data", async () => {

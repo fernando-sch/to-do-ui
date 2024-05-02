@@ -2,7 +2,7 @@ import {
   Title,
   TaskWrapper,
   Descrition,
-} from "@/tasks/components/task-card/task-card.styles";
+} from "@/tasks/components/card/card.styles";
 
 type TaskCardProps = {
   title: string;

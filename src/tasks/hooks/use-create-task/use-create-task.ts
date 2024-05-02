@@ -1,10 +1,23 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { axiosInstance } from "@/config";
 
-export const useCreateTask = () => {
-  const createTask = async () => {
-    return axiosInstance.post("/task")
-  };
+type TaskAttrs = {
+  title: string;
+  description: string | null;
+};
 
-  return useQuery({ queryKey: ["createTask"], queryFn: createTask });
+export const useCreateTask = () => {
+  const queryClient = useQueryClient();
+
+  const createTaskMutation = useMutation({
+    mutationKey: ["createTask"],
+    mutationFn: async (taskAttrs: TaskAttrs) => {
+      return await axiosInstance.post("/task", taskAttrs);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["fetchTasks"] });
+    },
+  });
+
+  return { ...createTaskMutation, createTask: createTaskMutation.mutateAsync };
 };

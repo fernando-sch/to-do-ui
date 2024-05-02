@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import { TaskCard } from "@/tasks/components/task-card";
+import { TaskCard } from "@/tasks/components/card";
 
 describe("TaskCard", () => {
   it("should render incomplete task", () => {

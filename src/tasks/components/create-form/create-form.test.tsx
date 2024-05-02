@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { screen, waitFor } from "@testing-library/react";
+import { screen, waitFor, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { CreateTaskForm } from "@/tasks/components/create-form";
 import {
@@ -57,14 +57,14 @@ describe("CreateTaskForm", () => {
     expect(titleInput).toHaveProperty("value", "Super Task Title");
     expect(descriptionInput).toHaveProperty("value", "Super Task Description");
 
-    await user.click(submitButton);
+    user.click(submitButton);
 
-    await waitFor(() => {
+    await waitFor(() =>
       expect(mocks.createTaskMock).toHaveBeenCalledWith({
         title: "Super Task Title",
         description: "Super Task Description",
-      });
-    });
+      })
+    );
   });
 
   it("should validate title input requirement", async () => {
@@ -75,8 +75,10 @@ describe("CreateTaskForm", () => {
     const submitButton = screen.getByRole("button", { name: /Create/ });
 
     await user.type(descriptionInput, "Super Task Description");
-    await user.click(submitButton);
+    user.click(submitButton);
 
-    expect(screen.getByText(/Title is required./)).toBeDefined();
+    await waitFor(() =>
+      expect(screen.getByText(/Title is required./)).toBeDefined()
+    );
   });
 });

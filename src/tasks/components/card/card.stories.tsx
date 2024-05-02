@@ -10,6 +10,6 @@ export const Default: Story = {
   args: {
     title: "Task Title",
     description: "Task Description",
-    isCompleted: false,
+    iscompleted: "false",
   },
 };

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-export const TaskWrapper = styled.li<{ isCompleted: boolean }>`
-  background: ${(props) => (props.isCompleted ? "#B1FADB" : "#CEC8C8")};
+export const TaskWrapper = styled.li<{ iscompleted: string }>`
+  background: ${(props) => (props.iscompleted == "true" ? "#B1FADB" : "#CEC8C8")};
   color: #1c1c1c;
   display: flex;
   justify-content: space-between;

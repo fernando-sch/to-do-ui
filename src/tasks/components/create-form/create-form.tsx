@@ -26,6 +26,7 @@ export const CreateTaskForm = () => {
   } = useForm<CreateTaskSchema>({
     resolver: zodResolver(createTaskSchema),
   });
+  const hasTitleFieldError = errors.title ? true : false;
 
   const onSubmit: SubmitHandler<CreateTaskSchema> = async (data) => {
     await createTask(data);
@@ -36,10 +37,10 @@ export const CreateTaskForm = () => {
       <Label>
         Task Title:
         <Input
-          error={errors.title}
+          error={hasTitleFieldError.toString()}
           {...register("title", { required: true })}
         />
-        <ErrorSpan>{errors.title && "Title is required."}</ErrorSpan>
+        <ErrorSpan>{hasTitleFieldError && "Title is required."}</ErrorSpan>
       </Label>
 
       <Label>

@@ -20,8 +20,9 @@ export const Label = styled.label`
   font-size: 1.2rem;
 `;
 
-export const Input = styled.input<{ error?: boolean }>`
-  border: 1px solid ${(props) => (props.error ? "#A72019" : "#1C1C1C")};
+export const Input = styled.input<{ error?: string }>`
+  border: 1px solid
+    ${(props) => (props.error == "true" ? "#A72019" : "#1C1C1C")};
   color: #1c1c1c;
   background-color: #fff6f6;
   border-radius: 5px;

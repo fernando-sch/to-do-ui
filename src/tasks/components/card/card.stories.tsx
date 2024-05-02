@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { TaskCard } from "@/tasks/components/task-card";
+import { TaskCard } from "@/tasks/components/card";
 
 const meta: Meta<typeof TaskCard> = { component: TaskCard };
 

@@ -7,16 +7,16 @@ import {
 type TaskCardProps = {
   title: string;
   description: string | null;
-  isCompleted?: boolean;
+  iscompleted?: string;
 };
 
 export const TaskCard = ({
   title,
   description,
-  isCompleted = false,
+  iscompleted = "false",
 }: TaskCardProps) => {
   return (
-    <TaskWrapper isCompleted={isCompleted}>
+    <TaskWrapper iscompleted={iscompleted}>
       <Title>{title}</Title>
       {description ? (
         <Descrition>{description}</Descrition>

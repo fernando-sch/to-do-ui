@@ -15,7 +15,7 @@ describe("TaskCard", () => {
       <TaskCard
         title="Task Title"
         description="Task Description"
-        isCompleted={true}
+        iscompleted="true"
       />
     );
 

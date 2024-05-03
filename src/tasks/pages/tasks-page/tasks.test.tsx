@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { TasksPage } from "@/tasks/pages/tasks-page";
 import {
   startMockServer,
@@ -28,6 +29,22 @@ describe("TasksPage", () => {
       expect(
         screen.getByText(/Task doesn't have a description./)
       ).toBeDefined();
+    });
+  });
+
+  it("should open create task modal on new task click", async () => {
+    const user = userEvent.setup();
+
+    renderComponentWithQueryProvider(<TasksPage />);
+
+    const newTaskButton = screen.getByRole("button", { name: /New Task/ });
+
+    user.click(newTaskButton);
+
+    await waitFor(() => {
+      expect(screen.getByLabelText(/Task Title:/)).toBeDefined();
+      expect(screen.getByLabelText(/Task Description:/)).toBeDefined();
+      expect(screen.getByRole("button", { name: /Create/ })).toBeDefined();
     });
   });
 });

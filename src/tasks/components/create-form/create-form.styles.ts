@@ -32,11 +32,11 @@ export const SubmitButton = styled.button`
   color: #1c1c1c;
   border: 1px solid #1c1c1c;
   border-radius: 5px;
-  background-color: #cec8c8;
+  background-color: transparent;
   padding: 0 5px;
   font-size: 1.2rem;
 
-  &: hover {
+  &:hover {
     cursor: pointer;
   }
 `;

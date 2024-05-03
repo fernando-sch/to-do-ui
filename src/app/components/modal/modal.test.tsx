@@ -6,6 +6,10 @@ import { Modal } from "@/app/components/modal";
 describe("ModalWrapper", () => {
   const onCloseMock = vi.fn();
 
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
+
   const renderModalWithContent = () => {
     const ModalContent = () => {
       return (
@@ -38,6 +42,18 @@ describe("ModalWrapper", () => {
     const closeIcon = screen.getByTitle(/Close Icon/);
 
     user.click(closeIcon);
+
+    await waitFor(() => expect(onCloseMock).toHaveBeenCalledOnce());
+  });
+
+  it("should call onClose on background click", async () => {
+    const user = userEvent.setup();
+
+    renderModalWithContent();
+
+    const modalBackground = screen.getByTestId(/modal-background/);
+
+    user.click(modalBackground);
 
     await waitFor(() => expect(onCloseMock).toHaveBeenCalledOnce());
   });

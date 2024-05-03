@@ -13,7 +13,7 @@ type ModalProps = {
 export const Modal = ({ children, onClose }: ModalProps) => {
   return (
     <>
-      <ModalBackground />
+      <ModalBackground data-testId="modal-background" onClick={onClose} />
       <ModalWrapper>
         <CloseButton onClick={onClose}>
           <IoMdClose title="Close Icon" />

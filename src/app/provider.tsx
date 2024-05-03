@@ -1,6 +1,17 @@
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { TasksPage } from "@/tasks/pages/tasks-page";
 
-const queryClient = new QueryClient();
+// React Router Dom
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <TasksPage />,
+  },
+]);
+
+// React Query
+const client = new QueryClient();
 
 type AppProviderProps = {
   children: React.ReactElement;
@@ -8,6 +19,9 @@ type AppProviderProps = {
 
 export const AppProvider = ({ children }: AppProviderProps) => {
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={client}>
+      <RouterProvider router={router} />
+      {children}
+    </QueryClientProvider>
   );
 };

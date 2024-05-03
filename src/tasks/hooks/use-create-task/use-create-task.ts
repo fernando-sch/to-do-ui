@@ -12,7 +12,7 @@ export const useCreateTask = () => {
   const createTaskMutation = useMutation({
     mutationKey: ["createTask"],
     mutationFn: async (taskAttrs: TaskAttrs) => {
-      return await axiosInstance.post("/task", taskAttrs);
+      return await axiosInstance.post("/tasks", taskAttrs);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["fetchTasks"] });

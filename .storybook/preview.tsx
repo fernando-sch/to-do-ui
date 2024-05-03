@@ -1,7 +1,7 @@
 import type { Preview } from "@storybook/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import '../src/index.css';
-import { startMockServer } from "../src/__tests__/helpers"
+import "../src/index.css";
+import { startMockServer } from "../src/__tests__/helpers";
 
 startMockServer();
 const client = new QueryClient();

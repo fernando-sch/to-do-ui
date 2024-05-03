@@ -6,6 +6,4 @@ const meta: Meta<typeof TasksPage> = { component: TasksPage };
 export default meta;
 type Story = StoryObj<typeof TasksPage>;
 
-export const Default: Story = {
-  args: {},
-};
+export const Default: Story = { render: () => <TasksPage /> };

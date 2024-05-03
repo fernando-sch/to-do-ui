@@ -7,7 +7,7 @@ export const startMockServer = () => {
     routes() {
       this.urlPrefix = envObject.apiBaseUrl;
 
-      this.post("/task", (_, request) => {
+      this.post("/tasks", (_, request) => {
         const attrs = JSON.parse(request.requestBody);
 
         return {

@@ -1,6 +1,6 @@
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { TasksPage } from "@/tasks/pages/tasks-page";
+import { TasksPage } from "@/tasks/pages/tasks";
 
 // React Router Dom
 const router = createBrowserRouter([

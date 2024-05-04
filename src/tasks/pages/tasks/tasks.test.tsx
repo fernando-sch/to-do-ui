@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { TasksPage } from "@/tasks/pages/tasks-page";
+import { TasksPage } from "@/tasks/pages/tasks";
 import {
   startMockServer,
   renderComponentWithQueryProvider,

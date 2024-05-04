@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { TasksPage } from "@/tasks/pages/tasks-page";
+import { TasksPage } from "@/tasks/pages/tasks";
 
 const meta: Meta<typeof TasksPage> = { component: TasksPage };
 

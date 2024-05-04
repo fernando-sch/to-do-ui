@@ -30,18 +30,17 @@ export const TasksPage = () => {
           <Title>TO DO List</Title>
           <NewTaskButton onClick={handleOpenModal}>New Task</NewTaskButton>
         </HeaderWrapper>
-        {data && (
-          <TasksWrapper>
-            {data.map((task) => (
-              <TaskCard
-                key={task.id}
-                title={task.title}
-                description={task.description}
-                iscompleted={task.isCompleted.toString()}
-              />
-            ))}
-          </TasksWrapper>
-        )}
+        <TasksWrapper>
+          {data?.map((task) => (
+            <TaskCard
+              key={task.id}
+              id={task.id}
+              title={task.title}
+              description={task.description}
+              iscompleted={task.isCompleted.toString()}
+            />
+          ))}
+        </TasksWrapper>
       </MainWrapper>
     </>
   );

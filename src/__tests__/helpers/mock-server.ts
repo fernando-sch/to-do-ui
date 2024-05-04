@@ -19,6 +19,10 @@ export const startMockServer = () => {
         };
       });
 
+      this.delete("/tasks/:id", () => {
+        return {};
+      });
+
       this.get("/tasks", () => ({
         data: [
           {

@@ -15,7 +15,6 @@ describe("useCreateTask", () => {
 
   afterEach(() => {
     server.shutdown();
-    vi.clearAllMocks();
   });
 
   it("should return success", async () => {

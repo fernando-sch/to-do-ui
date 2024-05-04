@@ -8,7 +8,7 @@ import {
   Title,
   TasksWrapper,
   NewTaskButton,
-} from "@/tasks/pages/tasks-page/tasks.styles";
+} from "@/tasks/pages/tasks/tasks.styles";
 import { useState } from "react";
 
 export const TasksPage = () => {

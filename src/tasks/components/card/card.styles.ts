@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const TaskWrapper = styled.li<{ iscompleted: string }>`
-  background: ${(props) => (props.iscompleted == "true" ? "#B1FADB" : "#CEC8C8")};
+  background: ${(props) =>
+    props.iscompleted == "true" ? "#B1FADB" : "#CEC8C8"};
   color: #1c1c1c;
   display: flex;
   justify-content: space-between;
@@ -24,6 +25,23 @@ export const Title = styled.h4`
 `;
 
 export const Descrition = styled.p`
+  @media (max-width: 640px) {
+    font-size: 0.8rem;
+  }
+`;
+
+export const DeleteButton = styled.button`
+  color: #a72019;
+  border: 1px solid #a72019;
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 0 5px;
+  font-size: 1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
   @media (max-width: 640px) {
     font-size: 0.8rem;
   }

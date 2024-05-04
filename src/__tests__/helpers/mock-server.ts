@@ -23,6 +23,14 @@ export const startMockServer = () => {
         return {};
       });
 
+      this.patch("/tasks/:id", (_, request) => {
+        const attrs = JSON.parse(request.requestBody);
+
+        return {
+          data: attrs,
+        };
+      });
+
       this.get("/tasks", () => ({
         data: [
           {

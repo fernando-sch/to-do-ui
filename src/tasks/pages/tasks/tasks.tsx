@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { TaskCard } from "@/tasks/components/card";
 import { useFetchTasks } from "@/tasks/hooks/use-fetch-tasks";
 import { Modal } from "@/app/components/modal";
@@ -9,10 +10,9 @@ import {
   TasksWrapper,
   NewTaskButton,
 } from "@/tasks/pages/tasks/tasks.styles";
-import { useState } from "react";
 
 export const TasksPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { data } = useFetchTasks();
 
   const handleOpenModal = () => setIsModalOpen(true);

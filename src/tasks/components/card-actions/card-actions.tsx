@@ -20,7 +20,8 @@ export const TaskCardActions = ({ id }: TaskCardActionsProps) => {
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
-  const completeTask = async () => await updateTask({ is_completed: true, id });
+  const handleCompleteTask = () => updateTask({ is_completed: true, id });
+  const handleDeleteTask = () => deleteTask(id);
 
   return (
     <>
@@ -30,13 +31,13 @@ export const TaskCardActions = ({ id }: TaskCardActionsProps) => {
         </Modal>
       )}
       <ActionsWrapper>
-        <ActionButton color="delete" onClick={() => deleteTask(id)}>
-          Delete
-        </ActionButton>
         <ActionButton color="primary" onClick={handleOpenModal}>
           Edit
         </ActionButton>
-        <ActionButton color="complete" onClick={completeTask}>
+        <ActionButton color="delete" onClick={handleDeleteTask}>
+          Delete
+        </ActionButton>
+        <ActionButton color="complete" onClick={handleCompleteTask}>
           Complete
         </ActionButton>
       </ActionsWrapper>

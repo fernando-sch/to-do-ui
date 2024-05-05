@@ -14,5 +14,5 @@ export const useDeleteTask = () => {
     },
   });
 
-  return { ...deleteTaskMutation, deleteTask: deleteTaskMutation.mutateAsync };
+  return { ...deleteTaskMutation, deleteTask: deleteTaskMutation.mutate };
 };

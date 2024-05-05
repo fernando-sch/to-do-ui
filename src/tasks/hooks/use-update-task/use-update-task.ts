@@ -21,5 +21,5 @@ export const useUpdateTask = () => {
     },
   });
 
-  return { ...updateTaskMutation, updateTask: updateTaskMutation.mutateAsync };
+  return { ...updateTaskMutation, updateTask: updateTaskMutation.mutate };
 };

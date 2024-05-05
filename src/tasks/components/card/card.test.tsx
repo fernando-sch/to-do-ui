@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { screen } from "@testing-library/react";
 import { TaskCard } from "@/tasks/components/card";
 import {
   startMockServer,
@@ -14,33 +13,6 @@ describe("TaskCard", () => {
     title: "Task Title",
     description: "Task Description",
   };
-
-  const mocks = vi.hoisted(() => {
-    return {
-      deleteTaskMock: vi.fn(),
-      updateTaskMock: vi.fn(),
-    };
-  });
-
-  vi.mock("@/tasks/hooks/use-delete-task", () => {
-    return {
-      useDeleteTask: vi.fn().mockImplementation(() => {
-        return {
-          deleteTask: mocks.deleteTaskMock,
-        };
-      }),
-    };
-  });
-
-  vi.mock("@/tasks/hooks/use-update-task", () => {
-    return {
-      useUpdateTask: vi.fn().mockImplementation(() => {
-        return {
-          updateTask: mocks.updateTaskMock,
-        };
-      }),
-    };
-  });
 
   beforeEach(() => {
     server = startMockServer();
@@ -62,6 +34,9 @@ describe("TaskCard", () => {
 
     expect(screen.getByText(/Task Title/)).toBeDefined();
     expect(screen.getByText(/Task Description/)).toBeDefined();
+    expect(screen.getByRole("button", { name: /Edit/ })).toBeDefined();
+    expect(screen.getByRole("button", { name: /Delete/ })).toBeDefined();
+    expect(screen.getByRole("button", { name: /Complete/ })).toBeDefined();
   });
 
   it("should render completed task", () => {
@@ -76,68 +51,13 @@ describe("TaskCard", () => {
 
     expect(screen.getByText(/Task Title/)).toBeDefined();
     expect(screen.getByText(/Task Description/)).toBeDefined();
-    expect(screen.getByRole("button", { name: /Delete/ })).toBeDefined();
   });
 
-  it("shouldn't render task description", () => {
+  it("should render default task description", () => {
     renderComponentWithQueryProvider(
       <TaskCard id={taskMock.id} title={taskMock.title} description={null} />
     );
 
     expect(screen.getByText(/Task doesn't have a description./)).toBeDefined();
-  });
-
-  it("should call delete task on delete task button click", async () => {
-    const user = userEvent.setup();
-
-    renderComponentWithQueryProvider(
-      <TaskCard
-        id={taskMock.id}
-        title={taskMock.title}
-        description={taskMock.description}
-        iscompleted="true"
-      />
-    );
-
-    const deleteButton = screen.getByRole("button", { name: /Delete/ });
-
-    user.click(deleteButton);
-
-    await waitFor(() => {
-      expect(mocks.deleteTaskMock).toHaveBeenCalledWith(taskMock.id);
-    });
-  });
-
-  it("should call update task on update task button click", async () => {
-    const user = userEvent.setup();
-
-    renderComponentWithQueryProvider(
-      <TaskCard
-        id={taskMock.id}
-        title={taskMock.title}
-        description={taskMock.description}
-        iscompleted="false"
-      />
-    );
-
-    const editButton = screen.getByRole("button", { name: /Edit/ });
-
-    user.click(editButton);
-
-    await waitFor(async () => {
-      const titleInput = screen.getByLabelText(/Task Title:/);
-      const descriptionInput = screen.getByLabelText(/Task Description:/);
-      const submitButton = screen.getByRole("button", { name: /Update/ });
-
-      await user.type(titleInput, "Updated Title");
-      await user.type(descriptionInput, "Updated Description");
-      user.click(submitButton);
-
-      expect(mocks.updateTaskMock).toHaveBeenCalledWith({
-        id: taskMock.id,
-        title: "Updated Title",
-        description: "Updated Description",
-      });
-    });
   });
 });

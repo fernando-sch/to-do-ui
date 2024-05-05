@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { Modal } from "@/app/components/modal";
 import { TaskCard } from "@/tasks/components/card";
 import { useFetchTasks } from "@/tasks/hooks/use-fetch-tasks";
-import { Modal } from "@/app/components/modal";
 import { CreateTaskForm } from "@/tasks/components/create-form";
+import { TaskCardActions } from "@/tasks/components/card-actions";
 import {
   MainWrapper,
   HeaderWrapper,
@@ -31,15 +32,20 @@ export const TasksPage = () => {
           <NewTaskButton onClick={handleOpenModal}>New Task</NewTaskButton>
         </HeaderWrapper>
         <TasksWrapper>
-          {data?.map((task) => (
-            <TaskCard
-              key={task.id}
-              id={task.id}
-              title={task.title}
-              description={task.description}
-              iscompleted={task.isCompleted.toString()}
-            />
-          ))}
+          {data?.map((task) => {
+            const isNotCompleted = !task.isCompleted;
+
+            return (
+              <TaskCard
+                key={task.id}
+                title={task.title}
+                description={task.description}
+                iscompleted={task.isCompleted.toString()}
+              >
+                {isNotCompleted && <TaskCardActions id={task.id} />}
+              </TaskCard>
+            );
+          })}
         </TasksWrapper>
       </MainWrapper>
     </>

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { TaskCard } from "@/tasks/components/card";
 import {
@@ -18,6 +18,7 @@ describe("TaskCard", () => {
   const mocks = vi.hoisted(() => {
     return {
       deleteTaskMock: vi.fn(),
+      updateTaskMock: vi.fn(),
     };
   });
 
@@ -26,6 +27,16 @@ describe("TaskCard", () => {
       useDeleteTask: vi.fn().mockImplementation(() => {
         return {
           deleteTask: mocks.deleteTaskMock,
+        };
+      }),
+    };
+  });
+
+  vi.mock("@/tasks/hooks/use-update-task", () => {
+    return {
+      useUpdateTask: vi.fn().mockImplementation(() => {
+        return {
+          updateTask: mocks.updateTaskMock,
         };
       }),
     };
@@ -94,6 +105,39 @@ describe("TaskCard", () => {
 
     await waitFor(() => {
       expect(mocks.deleteTaskMock).toHaveBeenCalledWith(taskMock.id);
+    });
+  });
+
+  it("should call update task on update task button click", async () => {
+    const user = userEvent.setup();
+
+    renderComponentWithQueryProvider(
+      <TaskCard
+        id={taskMock.id}
+        title={taskMock.title}
+        description={taskMock.description}
+        iscompleted="false"
+      />
+    );
+
+    const editButton = screen.getByRole("button", { name: /Edit/ });
+
+    user.click(editButton);
+
+    await waitFor(async () => {
+      const titleInput = screen.getByLabelText(/Task Title:/);
+      const descriptionInput = screen.getByLabelText(/Task Description:/);
+      const submitButton = screen.getByRole("button", { name: /Update/ });
+
+      await user.type(titleInput, "Updated Title");
+      await user.type(descriptionInput, "Updated Description");
+      user.click(submitButton);
+
+      expect(mocks.updateTaskMock).toHaveBeenCalledWith({
+        id: taskMock.id,
+        title: "Updated Title",
+        description: "Updated Description",
+      });
     });
   });
 });

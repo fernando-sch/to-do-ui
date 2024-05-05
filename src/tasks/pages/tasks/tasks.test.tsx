@@ -24,11 +24,12 @@ describe("TasksPage", () => {
     await waitFor(() => {
       expect(screen.getByText(/TO DO List/)).toBeDefined();
       expect(screen.getByText(/My Task/)).toBeDefined();
-      expect(screen.getByText(/My Second Task/)).toBeDefined();
       expect(screen.getByText(/Good description/)).toBeDefined();
-      expect(
-        screen.getByText(/Task doesn't have a description./)
-      ).toBeDefined();
+      expect(screen.getByText(/My Second Task/)).toBeDefined();
+      expect(screen.getByText(/Task doesn't have a description/)).toBeDefined();
+      expect(screen.getByRole("button", { name: /Edit/ })).toBeDefined();
+      expect(screen.getByRole("button", { name: /Delete/ })).toBeDefined();
+      expect(screen.getByRole("button", { name: /Complete/ })).toBeDefined();
     });
   });
 
